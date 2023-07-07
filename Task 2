@@ -1,0 +1,61 @@
+import javax.swing.JOptionPane;
+import java.util.Random;
+
+public class Numberguessing 
+     {
+    public static void main(String[] args) 
+         {
+        int startnumber= 1,endnumber= 100, maxAttempts =3;
+ int score = 0, rounds = 0;
+
+        Random random = new Random();
+        int randomNumber = random.nextInt(endnumber-startnumber + 1) + startnumber;
+        boolean playAgain = true;
+        while (playAgain)
+          {
+             rounds++;
+             int attempts = 0;
+             boolean guessCorrectly = false;
+ while (attempts < maxAttempts && !guessCorrectly)                   
+    { 
+String guessNumber=JOptionPane.showInputDialog(null,
+                        "Round " + rounds + ": Guess the number from a range" + startnumber + " and " + endnumber);
+                int guess = Integer.parseInt(guessNumber);
+
+           if (guess == randomNumber) 
+                 {
+                    guessCorrectly = true;
+                    score =score+1;
+                    JOptionPane.showMessageDialog(null, "Welldone! You guessed the correct number.");
+
+
+        JOptionPane.showMessageDialog(null, "Game over! The correct Number is" +randomNumber+"."+"Your score is " + score + " points in " + rounds + " rounds.");
+    rounds=0;
+score=0;
+     randomNumber = random.nextInt(endnumber-startnumber + 1) + startnumber;
+               }
+
+             else if (guess < randomNumber) 
+                  {
+                    JOptionPane.showMessageDialog(null, "The number is higher than the guess number" + guess + ".");
+                   }
+             else 
+                  {
+                    JOptionPane.showMessageDialog(null, "The number is lower than the guess number" + guess + ".");
+                   }
+
+                attempts++;
+            }
+
+         if (!guessCorrectly) 
+             {
+                JOptionPane.showMessageDialog(null, "Sorry, you did not guess the correct number.");
+            }
+
+            int choice = JOptionPane.showConfirmDialog(null, "Do you want to play again?", "Play Again", JOptionPane.YES_NO_OPTION);
+            playAgain = (choice == JOptionPane.YES_OPTION);
+        }
+
+        JOptionPane.showMessageDialog(null, "Game over! Thank You!!");
+    }
+}
